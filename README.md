@@ -1,1 +1,1 @@
-This project was created for educational purposes, nothing interesting
+This project was created for **educational** purposes, nothing interesting
