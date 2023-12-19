@@ -1,4 +1,13 @@
 <%- include('parts/navi') %>
+<script src="system/temp.js"></script>
+
 <main>
- <h2>something wrong</h2>
+    <button onclick="newThread()">create Thread</button>
+    <input type="text" id="thread" placeholder="thread name">
+    <!-- <button onclick="Data.read('myFile.json')">Read Data</button> -->
+    <br>
+    <br>
+    <br>
+    <input type="text" id="message" placeholder="Enter your message">
+    <button onclick="sendPostRequest()">Send Message</button>
 </main>
