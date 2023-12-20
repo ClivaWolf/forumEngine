@@ -14,31 +14,10 @@
 //     document.querySelector('input').value = '';
 //  });
 
-function sendPostRequest() {
-    // Получить значение из текстового поля
-    const message = document.getElementById('message').value;
-   
-    // Отправить POST запрос на сервер
-    fetch('/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            message: message
-        })
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
 
-
-function newThread() {
+function sendPostRequest(message, messageType) {
     // Получить значение из текстового поля
-    const message = document.getElementById('thread').value;
+    const msg = document.getElementById(messageType).value;
    
     // Отправить POST запрос на сервер
     fetch('/', {
@@ -48,8 +27,8 @@ function newThread() {
         },
         body: JSON.stringify({
             message: {
-                type:'newThread',
-                threadName:message
+                type: messageType,
+                [message]: msg
             }
         })
     })
@@ -58,4 +37,4 @@ function newThread() {
     .catch((error) => {
         console.error('Error:', error);
     });
-}
+ }

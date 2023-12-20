@@ -1,4 +1,4 @@
-export default class Thread{
+class Thread{
     constructor(name){
         this.name = name
         this.posts = []
@@ -9,3 +9,5 @@ export default class Thread{
         this.posts.push(name)
     }
 }
+
+module.exports = Thread;

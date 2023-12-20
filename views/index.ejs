@@ -2,12 +2,22 @@
 <script src="system/temp.js"></script>
 
 <main>
-    <button onclick="newThread()">create Thread</button>
+    <button onclick="sendPostRequest('thread', 'newThread');">create Thread</button>
     <input type="text" id="thread" placeholder="thread name">
-    <!-- <button onclick="Data.read('myFile.json')">Read Data</button> -->
     <br>
     <br>
     <br>
     <input type="text" id="message" placeholder="Enter your message">
     <button onclick="sendPostRequest()">Send Message</button>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <% for(let threadName in threads) { %>
+        <div class="thread">
+            <% console.log(threads) %>
+            <h2><%= threads[threadName].name %></h2>
+        </div>
+    <% } %>
 </main>
