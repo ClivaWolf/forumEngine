@@ -1,12 +1,14 @@
-export default class Member{
-    constructor(name, token){
+class Member{
+    constructor(name, token, pass){
         this.name = name
         this.token = token
-        this.lastOnline = Data.now()
+        this.lastOnline = Date.now()
+        this.pass = pass
     }
 
     dealActive(){
-        this.lastOnline = Data.now()
+        this.lastOnline = Date.now()
     }
-
 }
+
+module.exports = Member;

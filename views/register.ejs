@@ -2,15 +2,22 @@
     <script src="system/temp.js"></script>
 
     <main>
-        <form action="/login" method="post">
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-
-                <label for="psw"><b>Password</b></label>
-                <input type="paword" placeholder="Enter Password" name="psw" required>
-
-                <button type="submit">Login</button>
-            </div>
+        <form action="/reg" method="POST">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+     
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Введите ваш email" required>
+     
+            <label for="dob">Дата рождения:</label>
+            <input type="date" id="dob" name="dob" placeholder="Введите вашу дату рождения" required>
+     
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" placeholder="Введите ваш пароль" required>
+     
+            <label for="repassword">Повторите пароль:</label>
+            <input type="password" id="repassword" name="repassword" placeholder="Повторите ваш пароль" required>
+     
+            <button type="submit">Зарегистрироваться</button>
         </form>
     </main>
