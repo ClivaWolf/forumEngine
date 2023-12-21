@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Thread = require('./thread/thread.js')
-const Member = require('./members/member.js')
+const Member = require('./members/member.js');
+const { json } = require('express/lib/response.js');
 
 class Data {
     constructor() {
@@ -64,8 +65,12 @@ class Data {
     static checkUser(name,pass){
         return Data.getUsers().then(users=>{
             console.log(users)
-//////////////////TODODOO
-            return '/oops'
+            if (users[name].pass==pass){
+                console.log('first login')
+                return '/main'
+            } else {
+                return '/oops'
+            }
         })
     }
 }

@@ -14,21 +14,20 @@
 //     document.querySelector('input').value = '';
 //  });
 
-
-function sendPostRequest(message, messageType) {
+function sendPostRequest(route, inputId) {
     // Получить значение из текстового поля
-    const msg = document.getElementById(messageType).value;
+    const msg = document.getElementById(inputId).value;
+    console.log(msg)
    
     // Отправить POST запрос на сервер
-    fetch('/', {
+    fetch('/'+route, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             message: {
-                type: messageType,
-                [message]: msg
+                value: msg
             }
         })
     })

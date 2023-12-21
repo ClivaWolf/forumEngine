@@ -5,12 +5,11 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
 
-
 router.use(express.static(path.join(__dirname, 'public')));
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get('/', async (req, res) => {
+router.get(['/', '/main', '/forum'], async (req, res) => {
    const threads = await Data.getThreads();
    const session_id = uuid.v4()
 
@@ -24,14 +23,14 @@ router.get('/login', (req, res) => {
 
 router.post('/reg', (req, res) => {
    console.log(req.body)
-   Data.regUser(req.body.name,req.body.password)
+   Data.regUser(req.body.name, req.body.password)
    res.redirect('/login')
 });
 
-router.post('/log', (req, res) => {
-    //console.log(req.body)
-    res.redirect(Data.checkUser(req.body.name,req.body.password))
- });
+router.post('/log', async (req, res) => {
+   const redirectUrl = await Data.checkUser(req.body.uname, req.body.psw);
+   res.redirect(redirectUrl);
+});
 
 router.get('/register', (req, res) => {
    res.render('register');
@@ -39,9 +38,9 @@ router.get('/register', (req, res) => {
 
 router.use(function (req, res, next) {
    if (req.path !== '/oops') {
-       res.redirect('/oops');
+      res.redirect('/oops');
    } else {
-       next();
+      next();
    }
 });
 
@@ -49,13 +48,8 @@ router.get('/oops', (req, res) => {
    res.render('oops');
 });
 
-router.post('/', (req, res) => {
-   const message = req.body.message
-   console.log(message);
-
-   if (message.type == 'newThread') {
-       Data.addThread(message.threadName)
-   }
+router.post('/newThread', (req, res) => {
+   Data.addThread(req.body.value)
    res.json({ message: 'done' });
 });
 
