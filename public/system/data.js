@@ -10,31 +10,21 @@ class Data {
 
     static async read(filename) {
         try {
-            return new Promise((resolve, reject) => {
-                fs.readFile(filename + '.json', 'utf8', (err, data) => {
-                    if (err) {
-                        reject(err);
-                        return;
-                    }
-                    const jsonData = JSON.parse(data);
-                    resolve(jsonData);
-                });
-            });
+            const data = await fs.promises.readFile(filename + '.json', 'utf8');
+            const jsonData = JSON.parse(data);
+            return jsonData;
         } catch (err) {
             console.error(err);
         }
     }
 
-    static write(filename, jsonData) {
-        return new Promise((resolve, reject) => {
-            fs.writeFile(filename + '.json', JSON.stringify(jsonData), 'utf8', err => {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                resolve('File has been saved!');
-            });
-        });
+    static async write(filename, jsonData) {
+        try {
+            await fs.promises.writeFile(filename + '.json', JSON.stringify(jsonData), 'utf8');
+            return 'File has been saved!';
+        } catch (err) {
+            throw err;
+        }
     }
 
     static async getThreads() {
@@ -42,12 +32,16 @@ class Data {
         return Data.read('./data/Threads');
     }
 
-    static addThread(threadName) {
-        return Data.getThreads()
-            .then(threads => {
-                threads[threadName] = new Thread(threadName);
-                return Data.write('./data/Threads', threads);
-            });
+    static async addThread(threadName) {
+        const threads = await Data.getThreads();
+        threads[threadName] = new Thread(threadName);
+        await Data.write('./data/Threads', threads);
+    }
+
+    static async delThread(threadName) {
+        const threads = await Data.getThreads();
+        delete threads[threadName];
+        await Data.write('./data/Threads', threads);
     }
 
     static async getUsers() {
@@ -55,23 +49,27 @@ class Data {
         return Data.read('./data/members');
     }
 
-    static regUser(name,pass){
-        return Data.getUsers().then(users=>{
-            users[name /*id??*/] = new Member(name,'123',pass)
-            return Data.write('./data/members', users)
-        })
+    static async regUser(name, pass) {
+        const users = await Data.getUsers();
+        users[name] = new Member(name, '123', pass);
+        return Data.write('./data/members', users);
     }
 
-    static checkUser(name,pass){
-        return Data.getUsers().then(users=>{
-            console.log(users)
-            if (users[name].pass==pass){
-                console.log('first login')
-                return '/main'
+    static async checkUser(name, pass) {
+        try {
+            const users = await Data.getUsers();
+            console.log(users);
+
+            if (users[name].pass === pass) {
+                console.log('first login');
+                return '/main';
             } else {
-                return '/oops'
+                return '/oops';
             }
-        })
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 }
 

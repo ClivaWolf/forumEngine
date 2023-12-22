@@ -14,39 +14,37 @@
 //     document.querySelector('input').value = '';
 //  });
 
-function sendPostRequest(route, inputId) {
-    // Проверить, существует ли элемент
-    const inputElement = document.getElementById(inputId);
-    if (!inputElement) {
-        console.error(`Element with id ${inputId} does not exist.`);
-        return;
-    }
- 
-    // Получить значение из текстового поля
-    const msg = inputElement.value + '';
- 
-    // Отправить POST запрос на сервер
-    fetch('/' + route, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            message: {
-                value: msg
-            }
-        })
-    })
-    .then(response => {
-        // Проверить, является ли ответ JSON
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-            throw new TypeError("Oops, we haven't got JSON!");
+async function sendPostRequest(route, inputId) {
+  const inputElement = document.getElementById(inputId);
+  if (!inputElement) {
+    console.error(`Element with id ${inputId} does not exist.`);
+    return;
+  }
+
+  const msg = inputElement.value + '';
+
+  try {
+    const response = await fetch('/' + route, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: {
+          value: msg
         }
-        return response.json();
-    })
-    .then(data => console.log(data))
-    .catch((error) => {
-        console.error('Error:', error);
+      })
     });
- }
+
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      const text = await response.text();
+      throw new TypeError(`Oops, we haven't got JSON! Instead we got: ${text}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}

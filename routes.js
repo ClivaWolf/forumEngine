@@ -5,12 +5,10 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
 const audit = require('express-requests-logger');
+
 router.use(express.json());
-
-
-
+//router.use(audit());
 router.use(express.static(path.join(__dirname, 'public')));
-
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get(['/', '/main', '/forum'], async (req, res) => {
@@ -40,25 +38,31 @@ router.get('/register', (req, res) => {
    res.render('register');
 });
 
-router.use(function (req, res, next) {
-   if (req.path !== '/oops') {
-      res.redirect('/oops');
-   } else {
-      next();
-   }
-});
+
 
 router.get('/oops', (req, res) => {
    res.render('oops');
 });
 
 router.post('/newThread', (req, res) => {
-   console.log('try newThread')
-   //Data.addThread(req.body.message.value)
-   if (req.body.message && req.body.message.value !== undefined) {
-       res.json({ message: 'done' });
+   Data.addThread(req.body.message.value);
+});
+
+router.post('/delThread', (req, res) => {
+   Data.delThread(req.body.message.value);
+})
+
+
+
+
+
+
+
+router.use(function (req, res, next) {
+   if (req.path !== '/oops') {
+      res.redirect('/oops');
    } else {
-       res.status(400).json({ error: 'Invalid request' });
+      next();
    }
 });
 
