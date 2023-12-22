@@ -4,6 +4,10 @@ const path = require('path');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
+const audit = require('express-requests-logger');
+router.use(express.json());
+
+
 
 router.use(express.static(path.join(__dirname, 'public')));
 
@@ -49,8 +53,13 @@ router.get('/oops', (req, res) => {
 });
 
 router.post('/newThread', (req, res) => {
-   Data.addThread(req.body.value)
-   res.json({ message: 'done' });
+   console.log('try newThread')
+   //Data.addThread(req.body.message.value)
+   if (req.body.message && req.body.message.value !== undefined) {
+       res.json({ message: 'done' });
+   } else {
+       res.status(400).json({ error: 'Invalid request' });
+   }
 });
 
 module.exports = router;
