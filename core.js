@@ -5,6 +5,8 @@ const routes = require('./routes');
 const app = express();
 app.use(express.json());
 
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
+
 app.use(routes);
 
 Data.write('data/sessions', '{}')

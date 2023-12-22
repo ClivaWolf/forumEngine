@@ -1,0 +1,17 @@
+<head>
+    <!-- Другие метатеги -->
+    <title>My App</title>
+    <!-- Подключение CKEditor -->
+    <script src="/node_modules/ckeditor4/ckeditor.js"></script>
+</head>
+
+<body>
+    <!-- Ваш контент -->
+    <textarea name="editor1" id="editor1" rows="10" cols="80">
+        This is my textarea to be replaced with CKEditor.
+    </textarea>
+    <script>
+        // Замените ваш textarea на CKEditor.
+        CKEDITOR.replace('editor1');
+    </script>
+</body>

@@ -58,12 +58,12 @@ router.post('/delThread', (req, res) => {
 
 
 
-router.use(function (req, res, next) {
-   if (req.path !== '/oops') {
-      res.redirect('/oops');
-   } else {
-      next();
-   }
-});
+// router.use(function (req, res, next) {
+//    if (req.path !== '/oops') {
+//       res.redirect('/oops');
+//    } else {
+//       next();
+//    }
+// });
 
 module.exports = router;
