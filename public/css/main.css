@@ -1,3 +1,10 @@
+@import url('../node_modules/font-awesome/css/font-awesome.min.css');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
 body {
     background-color: var(--secondary-color);
     margin: 0;
@@ -45,4 +52,28 @@ main {
     align-items: center;
     justify-content: center;
     min-height: 80vh;
+}
+
+.icon-back {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    vertical-align: middle;
+
+    background-color: var(--darker-color);
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

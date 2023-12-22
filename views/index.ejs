@@ -7,31 +7,41 @@
 
     <main>
         <div class="center">
-            <button onclick="sendPostRequest('newThread', 'newThreadInput')">create Thread</button>
+            <%- include('parts/wip') %>
+            <!-- <button onclick="sendPostRequest('newThread', 'newThreadInput')">create Thread</button>
             <input type="text" id="newThreadInput" placeholder="thread name">
             <br><br><br>
             <input type="text" id="message" placeholder="Enter your message">
             <button onclick="sendPostRequest()">Send Message</button>
-            <br><br><br><br>
+            <br><br><br><br> -->
             <% for(let threadName in threads) { %>
                 <div class="thread">
-                    <h2>
-                        <%= threads[threadName].name %>
-                    </h2>
+                    <div class="threadIcon">
+                        <span class="icon-back">
+                            <i class="fa fa-comments"></i>
+                        </span>
+                    </div>
+                    <div class="threadMain">
+                        <h2>
+                            <%= threads[threadName].name %>
+                        </h2>
+                        <p title="description">
+                            <%= threads[threadName].description %>
+                        </p>
+                    </div>
                     <div class="listPost">
                         <ul>
-                            <% for(let post of threads[threadName].posts) { %>
-                                <li>
-                                    <%= post %>
-                                </li>
-                                <% } %>
-                                    <li>test-li</li>
-                                    <li>test-li</li>
+                            <% const posts=threads[threadName].posts.slice(-3).reverse(); %>
+                                <% for(let post of posts) { %>
+                                    <li>
+                                        <%= post %>
+                                    </li>
+                                    <% } %>
                         </ul>
                     </div>
                 </div>
                 <% } %>
-                <br><br><br>
-                <%- include('parts/editor') %>
+                    <br><br><br>
+                    <%- include('parts/editor') %>
         </div>
     </main>
