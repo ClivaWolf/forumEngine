@@ -1,9 +1,13 @@
 body {
+    background-color: var(--secondary-color);
     margin: 0;
+
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 nav {
-    background-color: #333;
+    background-color: var(--primary-color);
 }
    
 nav ul {
@@ -19,12 +23,26 @@ nav li {
    
 nav li a {
     display: block;
-    color: white;
+    color: var(--text-color);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
    
 nav li a:hover {
-    background-color: #111;
+    background-color: var(--darker-color);
+}
+
+.center {
+    width: 1080px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
 }

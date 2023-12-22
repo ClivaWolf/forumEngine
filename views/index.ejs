@@ -1,26 +1,37 @@
+<head>
+    <script src="system/temp.js"></script>
+    <link rel="stylesheet" href="css/threadOnPage.css">
+</head>
+
 <%- include('parts/navi') %>
-<script src="system/temp.js"></script>
 
-<main>
-    <button onclick="sendPostRequest('newThread', 'newThreadInput')">create Thread</button>
-    <input type="text" id="newThreadInput" placeholder="thread name">
-    <br>
-    <br>
-    <br>
-    <input type="text" id="message" placeholder="Enter your message">
-    <button onclick="sendPostRequest()">Send Message</button>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <% for(let threadName in threads) { %>
-        <div class="thread">
-            <h2><%= threads[threadName].name %></h2>
+    <main>
+        <div class="center">
+            <button onclick="sendPostRequest('newThread', 'newThreadInput')">create Thread</button>
+            <input type="text" id="newThreadInput" placeholder="thread name">
+            <br><br><br>
+            <input type="text" id="message" placeholder="Enter your message">
+            <button onclick="sendPostRequest()">Send Message</button>
+            <br><br><br><br>
+            <% for(let threadName in threads) { %>
+                <div class="thread">
+                    <h2>
+                        <%= threads[threadName].name %>
+                    </h2>
+                    <div class="listPost">
+                        <ul>
+                            <% for(let post of threads[threadName].posts) { %>
+                                <li>
+                                    <%= post %>
+                                </li>
+                                <% } %>
+                                    <li>test-li</li>
+                                    <li>test-li</li>
+                        </ul>
+                    </div>
+                </div>
+                <% } %>
+                <br><br><br>
+                <%- include('parts/editor') %>
         </div>
-    <% } %>
-    <br>
-    <br>
-    <br>
-    <%- include('parts/editor') %>
-</main>
+    </main>
