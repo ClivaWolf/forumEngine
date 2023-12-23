@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: var(--secondary-color);
+    background-color: var(--background-color-2);
     margin: 0;
 
     color: var(--text-color);
@@ -14,7 +14,7 @@ body {
 }
 
 nav {
-    background-color: var(--primary-color);
+    background-color: var(--background-color);
 }
    
 nav ul {
@@ -37,7 +37,7 @@ nav li a {
 }
    
 nav li a:hover {
-    background-color: var(--darker-color);
+    background-color: var(--elements-color);
 }
 
 .center {
@@ -66,7 +66,7 @@ main {
     text-align: center;
     vertical-align: middle;
 
-    background-color: var(--darker-color);
+    background-color: var(--elements-color);
 }
 
 .fa {
