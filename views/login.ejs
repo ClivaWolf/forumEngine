@@ -1,24 +1,40 @@
-<%- include('parts/navi') %>
+<%- include('parts/navi', { cookies: cookies }) %>
     <script src="system/temp.js"></script>
 
     <main>
-        <form action="/log" method="post">
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+        <div class="clvBorderBox register">
+            <form action="/log" method="post">
 
-                <button type="submit">Login</button>
-            </div>
+                <div class="clvPadding">
+                    <div class="clvMinSpaceBottom">
+                        <label for="uname">Имя:</label>
+                    </div>
 
-            <div class="container" style="background-color:#f1f1f1">
-                <button type="button" class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="/resetpass">password?</a></span>
-            </div>
-            <div class="container" style="background-color:#636363">
-                <span class="reg"><a href="/register">register</a></span>
-            </div>
-        </form>
+                    <div class="clvInputElement">
+                        <input  class="maxSize clvInputElement clvMinPadding" id="name" name="uname" placeholder="Введите ваше имя" required>
+                    </div>
+                </div>
+                <div class="clvPadding">
+                    <div class="clvMinSpaceBottom">
+                        <label for="psw">Пароль:</label>
+                    </div>
+
+                    <div class="">
+                        <input class="maxSize clvInputElement clvMinPadding" type="password" id="password" name="psw" placeholder="Введите ваш пароль" required>
+                    </div>
+                </div>
+
+                <div class="clvPadding">
+                    <button class="maxSize clvInputElement accent clvMinPadding" type="submit">Войти</button>
+                </div>
+
+                <div class="clvPadding">
+                    <span class="psw">Forgot <a href="/resetpass">password?</a></span>
+                </div>
+                <div class="clvPadding">
+                    <span class="reg"><a href="/register">register</a></span>
+                </div>
+            </form>
+        </div>
     </main>

@@ -61,7 +61,7 @@ class Data {
             console.log(users);
 
             if (users[name].pass === pass) {
-                console.log('first login');
+                //console.log('first login');
                 return '/main';
             } else {
                 return '/oops';

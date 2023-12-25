@@ -3,7 +3,10 @@ const Data = require('./public/system/data.js');
 const path = require('path');
 const routes = require('./routes');
 const app = express();
+const cookieParser = require('cookie-parser');
+
 app.use(express.json());
+// app.use(cookieParser());
 
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
@@ -18,5 +21,5 @@ app.set('views', path.join(__dirname, 'views'));
 
 const port = 3000;
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/`);
+   console.log(`Server running at http://localhost:${port}/`);
 });

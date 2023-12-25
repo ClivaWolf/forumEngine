@@ -77,3 +77,18 @@ main {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+a{
+    text-decoration: none;
+    color: var(--elements-color);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    border: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
