@@ -70,6 +70,13 @@ router.post('/reg', (req, res) => {
    res.redirect('/login', { cookies: req.cookies });
 });
 
+router.get('/contact', (req, res) => {
+   res.render('contact', { cookies: req.cookies });
+})
+
+router.get('/about', (req, res) => {
+   res.render('about', { cookies: req.cookies });
+})
 
 router.get('/oops', (req, res) => {
    res.render('oops', { cookies: req.cookies });

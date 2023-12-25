@@ -49,6 +49,47 @@
     color: var(--text-color);
 }
 
+.clvInputElement:hover{
+    border: 1px solid var(--elements-color);
+    cursor: text;
+}
+
+.clvInputElement:focus{
+    outline: none;
+    border: 1px solid var(--elements-color);
+}
+
+.clvInputElement:-internal-autofill-selected{
+    background-color: var(--background-color-2)!important;
+    border: 1px solid var(--accent-border-color);
+}
+
+.clvInputElement:active{
+    border: 1px solid var(--elements-color);
+}
+
+.clvButton{
+    background-color: var(--elements-color);
+    border: 1px solid var(--elements-color);
+    border-radius: var(--standart-border-radius);
+
+    color: var(--text-color);
+}
+
+.clvButton:hover{
+    background-color: rgba(var(--elements-color), 0.8);
+    cursor: pointer;
+}
+
 .accent{
     background-color: var(--elements-color);
+    border-color: var(--elements-color);
+}
+
+.accent:hover{
+    background-color: rgb(var(--elements-color), 0.8);
+}
+
+.clvLargeText{
+    font-size: 20px;
 }

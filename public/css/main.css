@@ -5,6 +5,11 @@
     margin: 0;
 }
 
+/* input:-internal-autofill-selected{
+    background-color: var(--background-color-2)!important;
+    border: 1px solid var(--accent-border-color);
+} */
+
 body {
     background-color: var(--background-color-2);
     margin: 0;
