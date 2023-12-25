@@ -36,14 +36,14 @@ router.get(['/', '/main', '/forum'], async (req, res) => {
 
     res.cookie('name', 'value', { signed: true, secret: 'clv12345' });
 
-    res.render('index', { threads: threads, cookies: req.cookies });
+    res.render('index', { threads: threads, userInfo: await Data.getUserInfo(req.cookies.session_id) });
   } catch (error) {
     console.error(error);
   }
 });
 
-router.get('/login', (req, res) => {
-   res.render('login', { cookies: req.cookies });
+router.get('/login', async (req, res) => {
+   res.render('login', { userInfo: await Data.getUserInfo(req.cookies.session_id)});
 });
 
 router.post('/log', async (req, res) => {
@@ -63,26 +63,26 @@ router.get('/logout', (req, res) => {
    res.redirect('/login');
 })
 
-router.get('/register', (req, res) => {
-   res.render('register', { cookies: req.cookies });
+router.get('/register', async (req, res) => {
+   res.render('register', { userInfo: await Data.getUserInfo(req.cookies.session_id)});
 });
 
-router.post('/reg', (req, res) => {
+router.post('/reg', async (req, res) => {
    console.log(req.body)
    Data.regUser(req.body.name, req.body.password)
-   res.redirect('/login', { cookies: req.cookies });
+   res.redirect('/login');
 });
 
-router.get('/contact', (req, res) => {
-   res.render('contact', { cookies: req.cookies });
+router.get('/contact', async (req, res) => {
+   res.render('contact', { userInfo: await Data.getUserInfo(req.cookies.session_id)});
 })
 
-router.get('/about', (req, res) => {
-   res.render('about', { cookies: req.cookies });
+router.get('/about', async (req, res) => {
+   res.render('about', { userInfo: await Data.getUserInfo(req.cookies.session_id)});
 })
 
-router.get('/oops', (req, res) => {
-   res.render('oops', { cookies: req.cookies });
+router.get('/oops', async (req, res) => {
+   res.render('oops', { userInfo: await Data.getUserInfo(req.cookies.session_id)});
 });
 
 router.post('/newThread', (req, res) => {

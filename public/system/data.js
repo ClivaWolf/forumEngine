@@ -98,6 +98,7 @@ class Data {
     }
 
     static async getUserInfo(session){
+        if(!session) return null;
         const sessions = await Data.getSessions();
         const username = sessions[session];
         const users = await Data.getUsers();

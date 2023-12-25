@@ -126,6 +126,14 @@
     align-content: center;
 }
 
+.clvVertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
 @keyframes rotate {
     from {
         transform: rotate(0deg);
