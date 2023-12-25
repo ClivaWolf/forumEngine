@@ -1,0 +1,7 @@
+<div>
+    <% if (userInfo.image) { %>
+        <img src="<%= userInfo.image %>" alt="Avatar" class="avatar">
+    <% } else { %>
+        <span class="clvUser" style="background-color: royalblue;"><%= userInfo.username[0] %></span>
+    <% } %>
+</div>

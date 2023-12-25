@@ -1,47 +1,47 @@
-.clvBorderBox{
+.clvBorderBox {
     background-color: var(--background-color-2);
     border: 1px solid var(--border-color);
     box-shadow: var(--border-shadow);
     border-radius: var(--standart-border-radius);
 }
 
-.clvLargeBody{
+.clvLargeBody {
     width: 100%;
     max-width: 1080px;
     margin: 0 auto;
 }
 
-.clvCenter{
+.clvCenter {
     margin: 0 auto;
 }
 
-.clvSpaceBottom{
+.clvSpaceBottom {
     margin-bottom: 10px;
 }
 
-.clvMinSpaceBottom{
+.clvMinSpaceBottom {
     margin-bottom: 5px;
 }
 
-.register{
+.register {
     min-width: 300px;
     max-width: 700px;
 }
 
-.clvPadding{
+.clvPadding {
     padding: 15px;
 }
 
-.clvMinPadding{
+.clvMinPadding {
     padding: 5px;
 }
 
-.maxSize{
+.maxSize {
     width: 100%;
-    max-width: 100%!important;
+    max-width: 100% !important;
 }
 
-.clvInputElement{
+.clvInputElement {
     background-color: var(--background-color-2);
     border: 1px solid var(--accent-border-color);
     border-radius: var(--standart-border-radius);
@@ -49,26 +49,26 @@
     color: var(--text-color);
 }
 
-.clvInputElement:hover{
+.clvInputElement:hover {
     border: 1px solid var(--elements-color);
     cursor: text;
 }
 
-.clvInputElement:focus{
+.clvInputElement:focus {
     outline: none;
     border: 1px solid var(--elements-color);
 }
 
-.clvInputElement:-internal-autofill-selected{
-    background-color: var(--background-color-2)!important;
+.clvInputElement:-internal-autofill-selected {
+    background-color: var(--background-color-2) !important;
     border: 1px solid var(--accent-border-color);
 }
 
-.clvInputElement:active{
+.clvInputElement:active {
     border: 1px solid var(--elements-color);
 }
 
-.clvButton{
+.clvButton {
     background-color: var(--elements-color);
     border: 1px solid var(--elements-color);
     border-radius: var(--standart-border-radius);
@@ -76,20 +76,53 @@
     color: var(--text-color);
 }
 
-.clvButton:hover{
+.clvButton:hover {
     background-color: rgba(var(--elements-color), 0.8);
     cursor: pointer;
 }
 
-.accent{
+.accent {
     background-color: var(--elements-color);
     border-color: var(--elements-color);
 }
 
-.accent:hover{
+.accent:hover {
     background-color: rgb(var(--elements-color), 0.8);
 }
 
-.clvLargeText{
+.clvLargeText {
     font-size: 20px;
+}
+
+.clvHorizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.clvRotate {
+    animation: rotate 4s linear infinite;
+}
+
+.clvUser{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
 }

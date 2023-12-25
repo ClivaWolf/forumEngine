@@ -1,23 +1,26 @@
+<% const userInf = {color:"#fa44fa", username:"asd"} %>
 <header>
   <link rel="stylesheet" type="text/css" href="/css/themes/dark.css">
   <link rel="stylesheet" type="text/css" href="/css/constructor.css">
   <link rel="stylesheet" type="text/css" href="/css/main.css">
 
   <nav>
-    <div class="clvLargeBody">
+    <div class="clvLargeBody clvHorizontal">
       <ul>
         <li><a href="/">Главная</a></li>
         <li><a href="/about">О проекте</a></li>
         <li><a href="/contact">Контакты</a></li>
         <li></li>
-        <li>
-          <% if (cookies.session_id) { %>
-            <a href="/logout">Выйти</a>
-           <% } else { %>
-            <a href="/login">Войти</a>
-           <% } %>
-        </li>
       </ul>
+      <ul>
+          <% if (cookies.session_id) { %>
+            <li><%- include('userCards/userLink', { userInfo: userInf })%></li>
+            <li><a href="/logout">Выйти</a></li>
+           <% } else { %>
+            <li><a href="/login">Войти</a></li>
+           <% } %>
+      </ul>
+
     </div>
 
   </nav>
