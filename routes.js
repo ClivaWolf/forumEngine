@@ -1,5 +1,6 @@
 const express = require('express');
 const Data = require('./public/system/data.js');
+const Thread = require('./public/system/thread/thread.js');
 const path = require('path');
 const router = express.Router();
 const bodyParser = require('body-parser');
@@ -90,8 +91,24 @@ router.post('/newThread', (req, res) => {
 });
 
 router.post('/delThread', (req, res) => {
+   //console.log(req.body.message.value, 'try to delete in router');
    Data.delThread(req.body.message.value);
 })
+
+router.get('/forum/:threadName', async (req, res) => {
+   try {
+     const threadName = req.params.threadName;
+     const json = JSON.parse(await Data.getThreadByLink(threadName))
+     console.log(json.posts,' - json')
+     const thread = new Thread(json.name, json.posts, json.link);
+     console.log(thread, ' - thread')
+     const posts = await Data.getPostList(json.posts);
+
+     res.render('intoThread', { posts: posts, userInfo: await Data.getUserInfo(req.cookies.session_id) });
+   } catch (error) {
+     console.error(error);
+   }
+  });
 
 // router.use(function (req, res, next) {
 //    if (req.cookies.session_id) {

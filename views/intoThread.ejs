@@ -1,0 +1,35 @@
+<head>
+    <script src="system/temp.js"></script>
+    <!-- <link rel="stylesheet" href="css/threadOnPage.css"> -->
+</head>
+
+<%- include('parts/navi', { userInfo: userInfo }) %>
+
+    <main>
+        <div class="clvLargeBody">
+            <%- include('parts/wip') %>
+                <% if (posts.length>0) { %>
+                    <% for(let postName in posts) { %>
+                        <div class="clvHorizontal clvSpaceBottom clvLine">
+                            <div class="clvPadding">
+                                <span class="icon-back">
+                                    <i class="fa fa-sticky-note"></i>
+                                </span>
+                            </div>
+                            <div class="clvHorizontal maxSize">
+                                <div class="clvVertical clvLeft">
+                                    <h2>
+                                        <%= posts[postName].name %>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                <% } %>
+                <% if (userInfo!==null) { %>
+                    <div class="clvLeft">
+                        <button class="clvButton" onclick="sendPostRequest('newPost', 'message')">Создать пост</button>
+                    </div>
+                <% } %>
+        </div>
+    </main>

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const Thread = require('./thread/thread.js')
+const Post = require('./thread/post.js')
 const Member = require('./members/member.js');
 const { json } = require('express/lib/response.js');
 
@@ -32,6 +33,20 @@ class Data {
         return Data.read('./data/Threads');
     }
 
+    static async getThread(threadName) {
+        const threads = await Data.getThreads();
+        return threads[threadName];
+    }
+
+    static async getThreadByLink(link) {
+        const threads = await Data.getThreads();
+        for (const threadName in threads) {
+            if (threads[threadName].link === link) {
+                return JSON.stringify(threads[threadName]);
+            }
+        }
+    }
+
     static async addThread(threadName) {
         const threads = await Data.getThreads();
         threads[threadName] = new Thread(threadName);
@@ -39,9 +54,36 @@ class Data {
     }
 
     static async delThread(threadName) {
+        //console.log(threadName,'try to delete');
         const threads = await Data.getThreads();
         delete threads[threadName];
         await Data.write('./data/Threads', threads);
+    }
+
+    static async addPost(threadName, postName, postData) {
+        const threads = await Data.getThreads();
+        const posts = await Data.getPosts();
+        threads[threadName].addPost(postName);
+
+        const post = new Post(postName, postData);
+        posts[threadName + '/' + postName] = post;
+        await Data.write('./data/posts', posts);
+
+    }
+
+    static async getPostList(list=[]){
+        const posts = await Data.getPosts();
+        const ret = []
+        for (const postname in posts) {
+            if (posts[postname].name && list.includes(posts[postname].name)) {
+                ret.push(posts[postname]);
+            }
+        }
+        return ret
+     }
+
+    static async getPosts() {
+        return Data.read('./data/posts');
     }
 
     static async getUsers() {
@@ -97,8 +139,8 @@ class Data {
         await Data.write('./data/sessions', sessions);
     }
 
-    static async getUserInfo(session){
-        if(!session) return null;
+    static async getUserInfo(session) {
+        if (!session) return null;
         const sessions = await Data.getSessions();
         const username = sessions[session];
         const users = await Data.getUsers();
