@@ -71,6 +71,38 @@ class Data {
             throw error;
         }
     }
+
+    static async addSession(session_id, name) {
+        const sessions = await Data.read('./data/sessions');
+        sessions[session_id] = name;
+        sessions[name] = session_id;
+        await Data.write('./data/sessions', sessions);
+    }
+
+    static async getSessions() {
+        return Data.read('./data/sessions');
+    }
+
+    static async delSession(session_id) {
+        const sessions = await Data.getSessions();
+        delete sessions[sessions[session_id]];
+        delete sessions[session_id];
+        await Data.write('./data/sessions', sessions);
+    }
+
+    static async delLastSession(name) {
+        const sessions = await Data.getSessions();
+        delete sessions[sessions[name]];
+        delete sessions[name];
+        await Data.write('./data/sessions', sessions);
+    }
+
+    static async getUserInfo(session){
+        const sessions = await Data.getSessions();
+        const username = sessions[session];
+        const users = await Data.getUsers();
+        return users[username];
+    }
 }
 
 module.exports = Data;

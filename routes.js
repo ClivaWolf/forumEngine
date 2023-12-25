@@ -49,13 +49,16 @@ router.get('/login', (req, res) => {
 router.post('/log', async (req, res) => {
    const redirectUrl = await Data.checkUser(req.body.uname, req.body.psw);
    if (redirectUrl == '/main') {
+      await Data.delLastSession(req.body.uname);
       const session_id = uuid.v4();
       res.cookie('session_id', session_id, { maxAge: 900000, httpOnly: true });
+      Data.addSession(session_id, req.body.uname);
    }
    res.redirect(redirectUrl);
  });
 
 router.get('/logout', (req, res) => {
+   Data.delSession(req.cookies.session_id);
    res.clearCookie('session_id');
    res.redirect('/login');
 })
@@ -90,7 +93,11 @@ router.post('/delThread', (req, res) => {
    Data.delThread(req.body.message.value);
 })
 
-
+// router.use(function (req, res, next) {
+//    if (req.cookies.session_id) {
+//       next();
+//    }
+// })
 
 // router.use(function (req, res, next) {
 //    if (req.path !== '/oops') {

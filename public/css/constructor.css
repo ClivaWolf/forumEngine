@@ -23,6 +23,30 @@
     margin-bottom: 5px;
 }
 
+.clvSpaceTop {
+    margin-top: 10px;
+}
+
+.clvMinSpaceTop {
+    margin-top: 5px;
+}
+
+.clvSpaceLeft {
+    margin-left: 10px;
+}
+
+.clvMinSpaceLeft {
+    margin-left: 5px;
+}
+
+.clvSpaceRight {
+    margin-right: 10px;
+}
+
+.clvMinSpaceRight {
+    margin-right: 5px;
+}
+
 .register {
     min-width: 300px;
     max-width: 700px;
@@ -126,3 +150,18 @@
     height: 40px;
     border-radius: 100%;
 }
+
+.vCenter{
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+   }
