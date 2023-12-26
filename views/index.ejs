@@ -21,7 +21,7 @@
                                     <div class="clvHorizontal maxSize">
                                         <div class="clvVertical clvLeft">
                                             <h2>
-                                                <a class="noUnderline" href="/forum/<%= threads[threadName].link %>"><%= threads[threadName].name %></a>
+                                                <a class="noUnderline" href="/forum/<%= threads[threadName].link %>/"><%= threads[threadName].name %></a>
                                             </h2>
                                             <p title="description">
                                                 <%= threads[threadName].description %>
@@ -45,7 +45,5 @@
                                     </div>
                                 </div>
                                 <% } %>
-                                    <br><br><br>
-                                    <%- include('parts/editor') %>
         </div>
     </main>

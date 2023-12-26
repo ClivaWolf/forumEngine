@@ -28,7 +28,13 @@
                 <% } %>
                 <% if (userInfo!==null) { %>
                     <div class="clvLeft">
-                        <button class="clvButton" onclick="sendPostRequest('newPost', 'message')">Создать пост</button>
+                        <a id="createPost" class="clvButton noUnderline clvMinPadding" href="#/createPost">Создать пост</a>
+                        <script>
+                            window.onload = function() {
+                                var createPostLink = document.getElementById("createPost");
+                                createPostLink.href = createPostLink.href.replace("#/", "");
+                            };
+                        </script>
                     </div>
                 <% } %>
         </div>

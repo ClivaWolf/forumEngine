@@ -28,23 +28,23 @@ const options = {
    httpOnly: true, // Кука не будет доступна через JavaScript
    secure: false, // Кука будет отправлена через HTTP и HTTPS
    signed: true // Кука будет подписана
-  };
+};
 
 
 router.get(['/', '/main', '/forum'], async (req, res) => {
-  try {
-    const threads = await Data.getThreads();
+   try {
+      const threads = await Data.getThreads();
 
-    res.cookie('name', 'value', { signed: true, secret: 'clv12345' });
+      res.cookie('name', 'value', { signed: true, secret: 'clv12345' });
 
-    res.render('index', { threads: threads, userInfo: await Data.getUserInfo(req.cookies.session_id) });
-  } catch (error) {
-    console.error(error);
-  }
+      res.render('index', { threads: threads, userInfo: await Data.getUserInfo(req.cookies.session_id) });
+   } catch (error) {
+      console.error(error);
+   }
 });
 
 router.get('/login', async (req, res) => {
-   res.render('login', { userInfo: await Data.getUserInfo(req.cookies.session_id)});
+   res.render('login', { userInfo: await Data.getUserInfo(req.cookies.session_id) });
 });
 
 router.post('/log', async (req, res) => {
@@ -56,7 +56,7 @@ router.post('/log', async (req, res) => {
       Data.addSession(session_id, req.body.uname);
    }
    res.redirect(redirectUrl);
- });
+});
 
 router.get('/logout', (req, res) => {
    Data.delSession(req.cookies.session_id);
@@ -65,7 +65,7 @@ router.get('/logout', (req, res) => {
 })
 
 router.get('/register', async (req, res) => {
-   res.render('register', { userInfo: await Data.getUserInfo(req.cookies.session_id)});
+   res.render('register', { userInfo: await Data.getUserInfo(req.cookies.session_id) });
 });
 
 router.post('/reg', async (req, res) => {
@@ -75,15 +75,15 @@ router.post('/reg', async (req, res) => {
 });
 
 router.get('/contact', async (req, res) => {
-   res.render('contact', { userInfo: await Data.getUserInfo(req.cookies.session_id)});
+   res.render('contact', { userInfo: await Data.getUserInfo(req.cookies.session_id) });
 })
 
 router.get('/about', async (req, res) => {
-   res.render('about', { userInfo: await Data.getUserInfo(req.cookies.session_id)});
+   res.render('about', { userInfo: await Data.getUserInfo(req.cookies.session_id) });
 })
 
 router.get('/oops', async (req, res) => {
-   res.render('oops', { userInfo: await Data.getUserInfo(req.cookies.session_id)});
+   res.render('oops', { userInfo: await Data.getUserInfo(req.cookies.session_id) });
 });
 
 router.post('/newThread', (req, res) => {
@@ -95,20 +95,50 @@ router.post('/delThread', (req, res) => {
    Data.delThread(req.body.message.value);
 })
 
-router.get('/forum/:threadName', async (req, res) => {
+router.get('/forum/:threadName/:do', async (req, res) => {
    try {
-     const threadName = req.params.threadName;
-     const json = JSON.parse(await Data.getThreadByLink(threadName))
-     console.log(json.posts,' - json')
-     const thread = new Thread(json.name, json.posts, json.link);
-     console.log(thread, ' - thread')
-     const posts = await Data.getPostList(json.posts);
-
-     res.render('intoThread', { posts: posts, userInfo: await Data.getUserInfo(req.cookies.session_id) });
+      const hasCreatePost = req.params.do=="createPost"?true:false
+      console.log(req.params, ' - params');
+      if (hasCreatePost) {
+         // Код для создания поста
+         res.render('createPost', { userInfo: await Data.getUserInfo(req.cookies.session_id) });
+      } else {
+         // Код для просмотра треда
+         const threadName = req.params.threadName;
+         console.log(threadName, ' - threadName');
+         const json = JSON.parse(await Data.getThreadByLink(threadName));
+         // console.log(json.posts, ' - json');
+         const thread = new Thread(json.name, json.posts, json.link);
+         // console.log(thread, ' - thread');
+         const posts = await Data.getPostList(json.posts);
+ 
+         res.render('intoThread', { posts: posts, userInfo: await Data.getUserInfo(req.cookies.session_id) });
+      }
    } catch (error) {
-     console.error(error);
+      console.error(error);
    }
-  });
+ });
+
+ router.get('/_forum/:threadName', async (req, res) => {
+   try {
+         // Код для просмотра треда
+         const threadName = req.params.threadName;
+         const json = JSON.parse(await Data.getThreadByLink(threadName));
+         // console.log(json.posts, ' - json');
+         const thread = new Thread(json.name, json.posts, json.link);
+         // console.log(thread, ' - thread');
+         const posts = await Data.getPostList(json.posts);
+ 
+         res.render('intoThread', { posts: posts, userInfo: await Data.getUserInfo(req.cookies.session_id) });
+   } catch (error) {
+      console.error(error);
+   }
+ });
+
+ router.post('/createPost', (req, res) => {
+    console.log(req.body)
+    Data.addPost(req.body.thread, req.body.name, req.body.editor1);
+ })
 
 // router.use(function (req, res, next) {
 //    if (req.cookies.session_id) {

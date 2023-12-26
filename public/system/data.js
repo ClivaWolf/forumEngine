@@ -61,12 +61,19 @@ class Data {
     }
 
     static async addPost(threadName, postName, postData) {
+        console.log(threadName, postName, postData, 'try to add post');
         const threads = await Data.getThreads();
         const posts = await Data.getPosts();
-        threads[threadName].addPost(postName);
+
+        const json = JSON.parse(await Data.getThread(threadName));
+        const thread = new Thread(json.name, json.posts, json.link);
+
+        thread.addPost(postName);
+        threads[threadName] = thread;
+        await Data.write('./data/Threads', threads);
 
         const post = new Post(postName, postData);
-        posts[threadName + '/' + postName] = post;
+        posts[postName] = post;
         await Data.write('./data/posts', posts);
 
     }
