@@ -10,14 +10,25 @@
             <form class="clvVertical" action="/createPost" method="POST">
                 <h2 class="clvCenter clvSpaceBottom clvSpaceTop">Создание поста</h2>
 
-                <input class="clvInputElement clvMinPadding maxSize2 clvSpaceBottom" type="text" name="name" placeholder="Название поста" required>
+                <input class="clvInputElement clvMinPadding maxSize2 clvSpaceBottom" type="text" name="name"
+                    placeholder="Название поста" required>
                 <%- include('parts/editor') %>
-                <input class="clvButton clvSpaceTop clvMinPadding clvSpaceBottom" type="submit" value="Создать пост">
-                <script>window.onload = function () {document.getElementById("cke_editor1").classList.add("maxSize2");};</script>
-                <input id="thread" type="hidden" name="thread" value="yourValue">
-                <script>
-                    document.getElementById("thread").value = window.location.pathname.split("/")[2];
-                </script>
+                    <input class="clvButton clvSpaceTop clvMinPadding clvSpaceBottom" type="submit"
+                        value="Создать пост">
+                    <script>
+                        window.addEventListener('load', function () {
+                            const editor = document.getElementById("cke_editor1");
+                            if (editor) {
+                                editor.classList.add("clvBorderRadius");
+                                editor.classList.add("maxSize2");
+                                editor.classList.add("dbody");
+                            }
+                        });
+                    </script>
+                    <input id="thread" type="hidden" name="thread" value="yourValue">
+                    <script>
+                        document.getElementById("thread").value = window.location.pathname.split("/")[2];
+                    </script>
 
             </form>
             <% } else { %>

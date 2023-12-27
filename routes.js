@@ -119,7 +119,7 @@ router.get('/forum/:threadName/:do', async (req, res) => {
    }
  });
 
- router.get('/_forum/:threadName', async (req, res) => {
+ router.get('/forum/:threadName', async (req, res) => {
    try {
          // Код для просмотра треда
          const threadName = req.params.threadName;

@@ -199,3 +199,7 @@
 .noUnderline:hover{
     text-decoration: none;
 }
+
+.clvBorderRadius{
+    border-radius: var(--standart-border-radius);
+}
